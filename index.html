@@ -3,7 +3,7 @@
 
 <head>
     <title>FAQSECURITY</title>
-    <link rel="icon" href="logo.jpeg" type="image/gif" sizes="16x16">
+    <link rel="icon" href="images/faqsecurity-logo-dark.svg" type="image/svg+xml" sizes="any">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" >
     <meta content="Ucam — CCTV Services Website Template" name="description" >
@@ -17,6 +17,7 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" >
     <link href="css/coloring.css" rel="stylesheet" type="text/css" >
     <!-- custom-css -->
+    <link href="css/logo-styles.css" rel="stylesheet" type="text/css" >
     <link href="css/swiper-custom-1.css" rel="stylesheet" type="text/css" >
     <!-- color scheme -->
     <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css" >
@@ -37,32 +38,40 @@
           
             </div>            
             <div class="container">
-                <div class="row mt-5">
-                    <div class="col-md-12">
-                        <div class="de-flex sm-pt10">
-                            <div class="de-flex-col">
-                                <!-- logo begin -->
-                                <div id="logo">
-                                    <a href="index.html">
-                                        <img class="logo-main" src="images/logo.jpeg" alt="" >
-                                        <img class="logo-scroll" src="images/logo.webp" alt="" >
-                                        <img class="logo-mobile" src="images/logo.webp" alt="" >
-                                    </a>
-                                </div>
-                                <!-- logo close -->
-                            </div>
-                          
-                            <div class="de-flex-col">
-                                <div class="menu_side_area">          
-                                    <a class="btn-main fx-slide" href="contact.html"><span>CONTACTATE</span></a>
-                                   
-                                </div>
+                <nav class="navbar navbar-expand-lg pt-3">
+                    <div class="container-fluid px-4">
+                        <!-- logo begin -->
+                        <div id="logo">
+                            <a href="index.html">
+                                <img class="logo-main" src="images/faqsecurity-logo-dark.svg" alt="Faqsecurity Logo">
+                                <img class="logo-scroll" src="images/faqsecurity-logo-dark.svg" alt="Faqsecurity Logo">
+                                <img class="logo-mobile" src="images/faqsecurity-logo-dark.svg" alt="Faqsecurity Logo">
+                            </a>
+                        </div>
+                        <!-- logo close -->
 
-                               
-                            </div>                            
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                            <ul class="navbar-nav align-items-center gap-4">
+                                <li class="nav-item">
+                                    <a class="nav-link active text-white" href="index.html">Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" href="#nosotros">Nosotros</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" href="#servicios">Servicios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn-main fx-slide" href="contact.html"><span>CONTACTATE</span></a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
+                </nav>
             </div>
         </header>
         <!-- header close -->
@@ -211,14 +220,47 @@
                     </div>
                 </div>
             </section>
-            
+
+            <!-- Nosotros Section Begin -->
+            <section id="nosotros" class="no-bottom bg-dark-2 pt-5 pb-5">
+                <div class="container">
+                    <div class="row g-4 mb-2 justify-content-center">
+                        <div class="col-lg-6 text-center">
+                            <div class="subtitle wow fadeInUp mb-3 text-primary">Nosotros</div>
+                            <h2 class="wow fadeInUp display-4 fw-bold text-white mb-5" data-wow-delay=".2s">Quiénes Somos</h2>
+                        </div>
+                    </div>
+                    <div class="row align-items-center g-5">
+                        <div class="col-lg-6 wow fadeInRight" data-wow-delay=".2s">
+                            <div class="relative">
+                                <img src="images/misc/4.webp" class="img-fluid rounded-1" alt="Equipo FAQSECURITY">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 wow fadeInLeft" data-wow-delay=".4s">
+                            <div class="p-5 bg-dark-1 rounded-1 shadow-lg">
+                                <h3 class="mb-4 text-white">Expertos en Seguridad</h3>
+                                <p class="lead text-white-50">En FAQSECURITY, nos dedicamos a brindar soluciones integrales de seguridad con tecnología de última generación.</p>
+                                <p class="text-white-50">Nuestra misión es proteger lo que más valoras, utilizando productos innovadores y un servicio personalizado que se adapta a tus necesidades específicas.</p>
+                                <ul class="ul-style-2 text-light mb-4 wow fadeInUp" data-wow-delay=".6s">
+                                    <li class="mb-2"><i class="fa fa-check me-2"></i>Más de 10 años de experiencia</li>
+                                    <li class="mb-2"><i class="fa fa-check me-2"></i>Tecnología de última generación</li>
+                                    <li class="mb-2"><i class="fa fa-check me-2"></i>Soporte técnico especializado</li>
+                                    <li class="mb-2"><i class="fa fa-check me-2"></i>Soluciones personalizadas</li>
+                                    <li class="mb-2"><i class="fa fa-check me-2"></i>Servicio post-venta garantizado</li>
+                                </ul>
+                                <a class="btn-main fx-slide mb10" href="contact.html"><span>Contáctanos</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Nosotros Section Close -->
 
             <section>
                 <div class="container">
                     <div class="row g-4 mb-2 justify-content-center">
                         <div class="col-lg-6 text-center">
                             <div class="subtitle wow fadeInUp">Servicios</div>
-                      
                         </div>
                     </div>
                     <section>
