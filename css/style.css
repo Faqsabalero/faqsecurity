@@ -1232,7 +1232,7 @@ section.no-bg,
 footer {
   color: var(--body-font-color-dark);
   background: var(--bg-dark-2);
-  padding: 100px 0 0 0;
+  padding: 50px 0 0 0;
 }
 
 footer.footer-light {
