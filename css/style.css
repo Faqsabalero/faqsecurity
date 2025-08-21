@@ -12547,3 +12547,41 @@ img {
   }
 }
 
+@media (max-width: 768px) {
+    header .logo-main {
+        display: none;
+    }
+
+    header .logo-mobile {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-nav {
+        width: 100%;
+    }
+
+    .navbar-toggler {
+        margin-left: auto;
+    }
+}
+
+/* Celeste glow effect for logo - Fixed */
+.logo-main, .logo-mobile {
+    filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.8));
+    transition: filter 0.3s ease;
+    max-width: 100%;
+    height: auto;
+}
+
+.logo-main:hover, .logo-mobile:hover {
+    filter: drop-shadow(0 0 12px rgba(0, 191, 255, 1));
+}
