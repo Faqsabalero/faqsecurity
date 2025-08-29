@@ -15,7 +15,7 @@ header.header-mobile {
     transition: all 0.3s ease;
 }
 
-/* Container con mejor espaciado */
+/* Container con mejor espaciado y alineación corregida */
 header.header-mobile .container {
     display: flex;
     align-items: center;
@@ -23,6 +23,28 @@ header.header-mobile .container {
     padding: 0 20px;
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
+}
+
+/* Flex items para mejor control de alineación */
+header.header-mobile .de-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+header.header-mobile .de-flex-col:first-child {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+header.header-mobile .de-flex-col:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
 }
 
 /* Logo mejorado con efecto glow */
@@ -52,6 +74,7 @@ header.header-mobile #logo .logo:hover {
     border: 2px solid rgba(0, 191, 255, 0.3);
     border-radius: 8px;
     transition: all 0.3s ease;
+    margin-left: auto;
 }
 
 #menu-btn:hover {
@@ -153,7 +176,7 @@ header.header-mobile #logo .logo:hover {
     }
     
     #mainmenu.active {
-        display: flex;
+        display: flex !important;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -173,7 +196,7 @@ header.header-mobile #logo .logo:hover {
     }
     
     #mainmenu li a {
-        display: block;
+        display: block !important;
         padding: 20px 30px;
         font-size: 20px;
         color: #ffffff !important;
@@ -188,6 +211,7 @@ header.header-mobile #logo .logo:hover {
         transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
+        cursor: pointer;
     }
     
     #mainmenu li a:before {
@@ -202,14 +226,16 @@ header.header-mobile #logo .logo:hover {
     }
     
     #mainmenu li a:hover:before,
-    #mainmenu li a:active:before {
+    #mainmenu li a:active:before,
+    #mainmenu li a:focus:before {
         left: 100%;
     }
     
     #mainmenu li a:hover,
-    #mainmenu li a:active {
-        background: rgba(0, 191, 255, 0.2);
-        border-color: rgba(0, 191, 255, 0.6);
+    #mainmenu li a:active,
+    #mainmenu li a:focus {
+        background: rgba(0, 191, 255, 0.2) !important;
+        border-color: rgba(0, 191, 255, 0.6) !important;
         color: #00bfff !important;
         transform: scale(1.05);
         box-shadow: 0 10px 25px rgba(0, 191, 255, 0.3);
@@ -283,5 +309,20 @@ header.header-mobile #logo .logo:hover {
     
     header.header-mobile .container {
         padding: 0 15px;
+    }
+    
+    header.header-mobile .de-flex-col:last-child {
+        gap: 15px;
+    }
+}
+
+/* Asegurar que el menú se cierre correctamente */
+#mainmenu:not(.active) {
+    display: none !important;
+}
+
+@media (min-width: 993px) {
+    #mainmenu {
+        display: block !important;
     }
 }
