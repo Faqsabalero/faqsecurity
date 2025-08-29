@@ -19,6 +19,7 @@
     <!-- custom-css -->
     <link href="css/logo-styles.css" rel="stylesheet" type="text/css" >
     <link href="css/swiper-custom-1.css" rel="stylesheet" type="text/css" >
+    <link href="css/navbar.css" rel="stylesheet" type="text/css" >
     <!-- color scheme -->
     <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css" >
 
@@ -33,7 +34,29 @@
         <!-- page preloader close -->
 
         <!-- header begin -->
- 
+        <header class="header-mobile">
+            <div class="container">
+                <div class="de-flex">
+                    <div class="de-flex-col">
+                        <div id="logo">
+                            <a href="index.html">
+                                <span class="logo">FAQSECURITY</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="de-flex-col">
+                        <span id="menu-btn"></span>
+                        <nav id="mainmenu">
+                            <ul>
+                                <li><a href="index.html">Inicio</a></li>
+                                <li><a href="#servicios">Servicio</a></li>
+                                <li><a href="#contacto">Contactanos</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
         <!-- header close -->
         <!-- content begin -->
         <div class="no-bottom no-top" id="content">
@@ -512,10 +535,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
-
-             
-            <section class="pt60 pb60">
+            <section id="contacto" class="pt60 pb60">
                 <div class="container">
                     <div class="row g-4">
 <div class="col-lg-4 col-md-6 wow fadeInRight" data-wow-delay=".2s">
@@ -581,6 +601,7 @@
     <script src="js/swiper.js"></script>
     <script src="js/custom-marquee.js"></script>
     <script src="js/custom-swiper-1.js"></script>
+    <script src="js/navbar.js"></script>
 
 </body>
 
