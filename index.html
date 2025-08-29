@@ -19,7 +19,6 @@
     <!-- custom-css -->
     <link href="css/logo-styles.css" rel="stylesheet" type="text/css" >
     <link href="css/swiper-custom-1.css" rel="stylesheet" type="text/css" >
-    <link href="css/navbar.css" rel="stylesheet" type="text/css" >
     <!-- color scheme -->
     <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css" >
 
@@ -34,27 +33,43 @@
         <!-- page preloader close -->
 
         <!-- header begin -->
-        <header class="header-mobile">
+        <header class="transparent">
+            <div id="topbar">
+          
+            </div>            
             <div class="container">
-                <div class="de-flex">
-                    <div class="de-flex-col">
+                <nav class="navbar navbar-expand-lg pt-3">
+                    <div class="container-fluid px-4">
+                        <!-- logo begin -->
                         <div id="logo">
                             <a href="index.html">
-                                <span class="logo">FAQSECURITY</span>
+                                <img class="logo-main" src="images/logo3.png" alt="Faqsecurity Logo">
+                                <img class="logo-scroll" src="images/logo3.png" alt="Faqsecurity Logo">
+                          
                             </a>
                         </div>
-                    </div>
-                    <div class="de-flex-col">
-                        <span id="menu-btn"></span>
-                        <nav id="mainmenu">
-                            <ul>
-                                <li><a href="index.html">Inicio</a></li>
-                                <li><a href="#servicios">Servicio</a></li>
-                                <li><a href="#contacto">Contactanos</a></li>
+                        <!-- logo close -->
+
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegación">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                            <ul class="navbar-nav align-items-center gap-4">
+                                <li class="nav-item">
+                                    <a class="nav-link active text-white" href="index.html">Inicio</a>
+                                </li>
+                             
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" href="#servicios">Servicios</a>
+                                </li>
+<li class="nav-item">
+                                    <a class="btn-main fx-slide" href="contact.html"><span>Contáctanos</span></a>
+                                </li>
                             </ul>
-                        </nav>
+                        </div>
                     </div>
-                </div>
+                </nav>
             </div>
         </header>
         <!-- header close -->
@@ -535,7 +550,10 @@
                         </div>
                     </div>
                 </div>
-            <section id="contacto" class="pt60 pb60">
+            </section>
+
+             
+            <section class="pt60 pb60">
                 <div class="container">
                     <div class="row g-4">
 <div class="col-lg-4 col-md-6 wow fadeInRight" data-wow-delay=".2s">
@@ -601,7 +619,6 @@
     <script src="js/swiper.js"></script>
     <script src="js/custom-marquee.js"></script>
     <script src="js/custom-swiper-1.js"></script>
-    <script src="js/navbar.js"></script>
 
 </body>
 
