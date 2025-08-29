@@ -1,4 +1,4 @@
-// Navbar Mobile Toggle - Funcionalidad Corregida para Cierre Automático
+// Navbar Mobile Toggle - Ocultación Completa y Menú Más Pequeño
 document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.getElementById('menu-btn');
     const mainMenu = document.getElementById('mainmenu');
@@ -11,57 +11,84 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
-    console.log('Enhanced navbar initialized successfully');
+    console.log('Enhanced navbar with COMPACT menu initialized successfully');
     
     // Variables de estado
     let isMenuOpen = false;
     let scrollTimeout;
     
-    // Función para cerrar el menú con efectos - MEJORADA
+    // Función para cerrar el menú COMPLETAMENTE
     function closeMenu() {
-        console.log('Attempting to close menu, current state:', isMenuOpen);
+        console.log('FORCING COMPLETE MENU CLOSURE');
         
+        // Remover todas las clases activas
         mainMenu.classList.remove('active');
         menuBtn.classList.remove('menu-open');
         body.classList.remove('menu-open');
         header.classList.remove('menu-active');
-        isMenuOpen = false;
         
-        // Restaurar scroll INMEDIATAMENTE
+        // FORZAR OCULTACIÓN COMPLETA CON MÚLTIPLES MÉTODOS
+        mainMenu.style.display = 'none';
+        mainMenu.style.opacity = '0';
+        mainMenu.style.visibility = 'hidden';
+        mainMenu.style.pointerEvents = 'none';
+        mainMenu.style.transform = 'translateX(-50%) translateY(-20px) scale(0.9)';
+        
+        // Restaurar scroll del body INMEDIATAMENTE
         body.style.overflow = '';
         body.style.position = '';
+        body.style.width = '';
+        body.style.height = '';
         
-        console.log('Menu closed with enhanced effects - FORCED');
+        // Actualizar estado
+        isMenuOpen = false;
+        
+        console.log('Menu COMPLETELY HIDDEN with all methods');
     }
     
-    // Función para abrir el menú con efectos
+    // Función para abrir el menú
     function openMenu() {
         if (isMenuOpen) return;
         
+        console.log('Opening compact menu');
+        
+        // Agregar clases activas
         mainMenu.classList.add('active');
         menuBtn.classList.add('menu-open');
         body.classList.add('menu-open');
         header.classList.add('menu-active');
-        isMenuOpen = true;
         
-        // Prevenir scroll en mobile cuando el menú está abierto
+        // FORZAR VISIBILIDAD COMPLETA
+        mainMenu.style.display = 'flex';
+        mainMenu.style.opacity = '1';
+        mainMenu.style.visibility = 'visible';
+        mainMenu.style.pointerEvents = 'all';
+        mainMenu.style.transform = 'translateX(-50%) translateY(0) scale(1)';
+        
+        // Prevenir scroll en mobile
         if (window.innerWidth <= 992) {
             body.style.overflow = 'hidden';
             body.style.position = 'fixed';
             body.style.width = '100%';
+            body.style.height = '100%';
         }
         
-        console.log('Menu opened with enhanced effects');
+        // Actualizar estado
+        isMenuOpen = true;
+        
+        console.log('Compact menu opened successfully');
     }
     
-    // Toggle del menú móvil con efectos mejorados
+    // Toggle del menú móvil
     menuBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         
-        // Efecto de vibración en mobile
+        console.log('Menu button clicked, current state:', isMenuOpen);
+        
+        // Vibración en mobile
         if (navigator.vibrate) {
-            navigator.vibrate(50);
+            navigator.vibrate(30);
         }
         
         if (isMenuOpen) {
@@ -71,23 +98,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Cerrar menú al hacer click en un enlace - CORREGIDO
+    // Cerrar menú al hacer click en un enlace - MEJORADO
     const menuLinks = mainMenu.querySelectorAll('li a');
     console.log('Found menu links:', menuLinks.length);
     
     menuLinks.forEach(function(link, index) {
         link.addEventListener('click', function(e) {
             console.log('Link clicked:', link.textContent, 'Window width:', window.innerWidth);
-            console.log('Menu open state before click:', isMenuOpen);
+            console.log('Menu state before link click:', isMenuOpen);
             
             // FORZAR CIERRE INMEDIATO EN MOBILE
             if (window.innerWidth <= 992 && isMenuOpen) {
                 e.preventDefault(); // Prevenir navegación inmediata
                 
-                // Crear efecto ripple
+                // Crear efecto ripple más pequeño
                 const ripple = document.createElement('span');
                 const rect = link.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
+                const size = Math.min(rect.width, rect.height) * 0.8; // MÁS PEQUEÑO
                 const x = e.clientX - rect.left - size / 2;
                 const y = e.clientY - rect.top - size / 2;
                 
@@ -97,20 +124,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     height: ${size}px;
                     left: ${x}px;
                     top: ${y}px;
-                    background: radial-gradient(circle, rgba(0, 191, 255, 0.6) 0%, transparent 70%);
+                    background: radial-gradient(circle, rgba(0, 191, 255, 0.5) 0%, transparent 70%);
                     border-radius: 50%;
                     transform: scale(0);
-                    animation: ripple 0.6s ease-out;
+                    animation: ripple 0.4s ease-out;
                     pointer-events: none;
                     z-index: 1000;
                 `;
                 
                 link.appendChild(ripple);
                 
-                // CERRAR MENÚ INMEDIATAMENTE
+                // CERRAR MENÚ INMEDIATAMENTE Y COMPLETAMENTE
                 closeMenu();
                 
-                // Navegar después de cerrar el menú
+                // Navegar después de cerrar
                 setTimeout(() => {
                     const href = link.getAttribute('href');
                     if (href && href.startsWith('#')) {
@@ -132,14 +159,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (ripple.parentNode) {
                         ripple.parentNode.removeChild(ripple);
                     }
-                }, 100);
+                }, 50); // DELAY MÁS CORTO
             }
         });
         
-        // Efectos hover mejorados
+        // Efectos hover mejorados para desktop
         link.addEventListener('mouseenter', function() {
             if (window.innerWidth > 992) {
-                link.style.transform = 'translateY(-3px) scale(1.05)';
+                link.style.transform = 'translateY(-2px) scale(1.03)';
             }
         });
         
@@ -150,11 +177,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Cerrar menú al hacer click fuera de él - MEJORADO
+    // Cerrar menú al hacer click fuera - MEJORADO
     document.addEventListener('click', function(e) {
         if (window.innerWidth <= 992 && isMenuOpen) {
             if (!mainMenu.contains(e.target) && !menuBtn.contains(e.target)) {
-                console.log('Clicking outside menu, closing...');
+                console.log('Clicking outside compact menu, closing...');
                 closeMenu();
             }
         }
@@ -166,17 +193,19 @@ document.addEventListener('DOMContentLoaded', function() {
             closeMenu();
         }
         
-        // Restaurar overflow del body
+        // Restaurar estilos del body en desktop
         if (window.innerWidth > 992) {
             body.style.overflow = '';
             body.style.position = '';
+            body.style.width = '';
+            body.style.height = '';
         }
     });
     
     // Cerrar menú con tecla Escape
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && isMenuOpen) {
-            console.log('Escape pressed, closing menu...');
+            console.log('Escape pressed, closing compact menu...');
             closeMenu();
         }
     });
@@ -190,14 +219,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const currentScrollY = window.scrollY;
         
-        // Agregar clase scrolled cuando se hace scroll
         if (currentScrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
         
-        // Ocultar/mostrar header en scroll (opcional)
+        // Auto-hide header en scroll (opcional)
         if (currentScrollY > lastScrollY && currentScrollY > 100) {
             header.style.transform = 'translateY(-100%)';
         } else {
@@ -207,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
         lastScrollY = currentScrollY;
     }
     
-    // Throttle scroll events para mejor performance
+    // Throttle scroll events
     window.addEventListener('scroll', function() {
         if (scrollTimeout) {
             clearTimeout(scrollTimeout);
@@ -215,11 +243,11 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollTimeout = setTimeout(handleScroll, 10);
     });
     
-    // Detectar cambios de orientación en mobile
+    // Detectar cambios de orientación
     window.addEventListener('orientationchange', function() {
         setTimeout(() => {
             if (isMenuOpen) {
-                console.log('Orientation changed, closing menu...');
+                console.log('Orientation changed, closing compact menu...');
                 closeMenu();
             }
         }, 100);
@@ -228,14 +256,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Detectar cambio de visibilidad de página
     document.addEventListener('visibilitychange', function() {
         if (document.hidden && isMenuOpen) {
-            console.log('Page hidden, closing menu...');
+            console.log('Page hidden, closing compact menu...');
             closeMenu();
         }
     });
     
-    // Agregar estilos CSS para ripple effect
-    const rippleStyles = document.createElement('style');
-    rippleStyles.textContent = `
+    // Detectar pérdida de foco
+    window.addEventListener('blur', function() {
+        if (isMenuOpen) {
+            console.log('Window lost focus, closing compact menu...');
+            closeMenu();
+        }
+    });
+    
+    // Agregar estilos CSS para efectos
+    const compactStyles = document.createElement('style');
+    compactStyles.textContent = `
         @keyframes ripple {
             to {
                 transform: scale(2);
@@ -247,40 +283,60 @@ document.addEventListener('DOMContentLoaded', function() {
             overflow: hidden !important;
             position: fixed !important;
             width: 100% !important;
+            height: 100% !important;
         }
         
         header.menu-active {
             box-shadow: 0 8px 40px rgba(0, 191, 255, 0.3), 0 0 0 1px rgba(0, 191, 255, 0.4);
         }
+        
+        /* FORZAR OCULTACIÓN COMPLETA */
+        #mainmenu:not(.active) {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
     `;
-    document.head.appendChild(rippleStyles);
+    document.head.appendChild(compactStyles);
     
     // Función de emergencia para cerrar menú
-    window.forceCloseMenu = function() {
-        console.log('FORCE CLOSING MENU');
+    window.forceCloseCompactMenu = function() {
+        console.log('EMERGENCY: FORCE CLOSING COMPACT MENU');
         closeMenu();
     };
     
     // Inicialización completa
-    console.log('Enhanced navbar with FIXED mobile menu closing ready');
+    console.log('Compact navbar with COMPLETE hiding ready');
 });
 
-// Función global para cerrar menú (útil para otros scripts) - MEJORADA
+// Función global mejorada
 window.closeNavbarMenu = function() {
-    console.log('Global close menu called');
+    console.log('Global close compact menu called');
     const mainMenu = document.getElementById('mainmenu');
     const menuBtn = document.getElementById('menu-btn');
     const body = document.body;
     const header = document.querySelector('header.header-mobile');
     
     if (mainMenu && menuBtn) {
+        // Remover clases
         mainMenu.classList.remove('active');
         menuBtn.classList.remove('menu-open');
         body.classList.remove('menu-open');
         if (header) header.classList.remove('menu-active');
+        
+        // FORZAR OCULTACIÓN COMPLETA
+        mainMenu.style.display = 'none';
+        mainMenu.style.opacity = '0';
+        mainMenu.style.visibility = 'hidden';
+        mainMenu.style.pointerEvents = 'none';
+        
+        // Restaurar body
         body.style.overflow = '';
         body.style.position = '';
         body.style.width = '';
-        console.log('Global menu close completed');
+        body.style.height = '';
+        
+        console.log('Global compact menu close completed');
     }
 };
