@@ -1,4 +1,4 @@
-// Navbar Mobile Toggle - Funcionalidad y Efectos Mejorados
+// Navbar Mobile Toggle - Funcionalidad Corregida para Cierre Automático
 document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.getElementById('menu-btn');
     const mainMenu = document.getElementById('mainmenu');
@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let isMenuOpen = false;
     let scrollTimeout;
     
-    // Función para cerrar el menú con efectos
+    // Función para cerrar el menú con efectos - MEJORADA
     function closeMenu() {
-        if (!isMenuOpen) return;
+        console.log('Attempting to close menu, current state:', isMenuOpen);
         
         mainMenu.classList.remove('active');
         menuBtn.classList.remove('menu-open');
@@ -27,10 +27,11 @@ document.addEventListener('DOMContentLoaded', function() {
         header.classList.remove('menu-active');
         isMenuOpen = false;
         
-        // Restaurar scroll
+        // Restaurar scroll INMEDIATAMENTE
         body.style.overflow = '';
+        body.style.position = '';
         
-        console.log('Menu closed with enhanced effects');
+        console.log('Menu closed with enhanced effects - FORCED');
     }
     
     // Función para abrir el menú con efectos
@@ -46,6 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Prevenir scroll en mobile cuando el menú está abierto
         if (window.innerWidth <= 992) {
             body.style.overflow = 'hidden';
+            body.style.position = 'fixed';
+            body.style.width = '100%';
         }
         
         console.log('Menu opened with enhanced effects');
@@ -68,50 +71,68 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Cerrar menú al hacer click en un enlace con efectos
+    // Cerrar menú al hacer click en un enlace - CORREGIDO
     const menuLinks = mainMenu.querySelectorAll('li a');
     console.log('Found menu links:', menuLinks.length);
     
     menuLinks.forEach(function(link, index) {
-        // Agregar efecto de ripple
         link.addEventListener('click', function(e) {
             console.log('Link clicked:', link.textContent, 'Window width:', window.innerWidth);
+            console.log('Menu open state before click:', isMenuOpen);
             
-            // Crear efecto ripple
-            const ripple = document.createElement('span');
-            const rect = link.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-            
-            ripple.style.cssText = `
-                position: absolute;
-                width: ${size}px;
-                height: ${size}px;
-                left: ${x}px;
-                top: ${y}px;
-                background: radial-gradient(circle, rgba(0, 191, 255, 0.6) 0%, transparent 70%);
-                border-radius: 50%;
-                transform: scale(0);
-                animation: ripple 0.6s ease-out;
-                pointer-events: none;
-                z-index: 1000;
-            `;
-            
-            link.appendChild(ripple);
-            
-            // Remover ripple después de la animación
-            setTimeout(() => {
-                if (ripple.parentNode) {
-                    ripple.parentNode.removeChild(ripple);
-                }
-            }, 600);
-            
-            // Cerrar menú en mobile con delay para permitir navegación
-            if (window.innerWidth <= 992) {
-                setTimeout(function() {
-                    closeMenu();
-                }, 150);
+            // FORZAR CIERRE INMEDIATO EN MOBILE
+            if (window.innerWidth <= 992 && isMenuOpen) {
+                e.preventDefault(); // Prevenir navegación inmediata
+                
+                // Crear efecto ripple
+                const ripple = document.createElement('span');
+                const rect = link.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: radial-gradient(circle, rgba(0, 191, 255, 0.6) 0%, transparent 70%);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s ease-out;
+                    pointer-events: none;
+                    z-index: 1000;
+                `;
+                
+                link.appendChild(ripple);
+                
+                // CERRAR MENÚ INMEDIATAMENTE
+                closeMenu();
+                
+                // Navegar después de cerrar el menú
+                setTimeout(() => {
+                    const href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        const target = document.querySelector(href);
+                        if (target) {
+                            const headerHeight = header.offsetHeight;
+                            const targetPosition = target.offsetTop - headerHeight - 20;
+                            
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    } else if (href) {
+                        window.location.href = href;
+                    }
+                    
+                    // Limpiar ripple
+                    if (ripple.parentNode) {
+                        ripple.parentNode.removeChild(ripple);
+                    }
+                }, 100);
             }
         });
         
@@ -129,10 +150,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Cerrar menú al hacer click fuera de él
+    // Cerrar menú al hacer click fuera de él - MEJORADO
     document.addEventListener('click', function(e) {
         if (window.innerWidth <= 992 && isMenuOpen) {
             if (!mainMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                console.log('Clicking outside menu, closing...');
                 closeMenu();
             }
         }
@@ -147,20 +169,25 @@ document.addEventListener('DOMContentLoaded', function() {
         // Restaurar overflow del body
         if (window.innerWidth > 992) {
             body.style.overflow = '';
+            body.style.position = '';
         }
     });
     
     // Cerrar menú con tecla Escape
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && isMenuOpen) {
+            console.log('Escape pressed, closing menu...');
             closeMenu();
         }
     });
     
-    // Efecto de scroll en header
+    // Efecto de scroll en header - DESHABILITADO CUANDO MENU ABIERTO
     let lastScrollY = window.scrollY;
     
     function handleScroll() {
+        // No manejar scroll si el menú está abierto
+        if (isMenuOpen) return;
+        
         const currentScrollY = window.scrollY;
         
         // Agregar clase scrolled cuando se hace scroll
@@ -188,38 +215,22 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollTimeout = setTimeout(handleScroll, 10);
     });
     
-    // Smooth scroll para enlaces internos
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerHeight = header.offsetHeight;
-                const targetPosition = target.offsetTop - headerHeight - 20;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Preloader para transiciones
-    function showLoader() {
-        header.classList.add('navbar-loading');
-        setTimeout(() => {
-            header.classList.remove('navbar-loading');
-        }, 300);
-    }
-    
     // Detectar cambios de orientación en mobile
     window.addEventListener('orientationchange', function() {
         setTimeout(() => {
             if (isMenuOpen) {
+                console.log('Orientation changed, closing menu...');
                 closeMenu();
             }
         }, 100);
+    });
+    
+    // Detectar cambio de visibilidad de página
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden && isMenuOpen) {
+            console.log('Page hidden, closing menu...');
+            closeMenu();
+        }
     });
     
     // Agregar estilos CSS para ripple effect
@@ -234,6 +245,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         .menu-open {
             overflow: hidden !important;
+            position: fixed !important;
+            width: 100% !important;
         }
         
         header.menu-active {
@@ -242,20 +255,32 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(rippleStyles);
     
+    // Función de emergencia para cerrar menú
+    window.forceCloseMenu = function() {
+        console.log('FORCE CLOSING MENU');
+        closeMenu();
+    };
+    
     // Inicialización completa
-    console.log('Enhanced navbar with advanced effects ready');
+    console.log('Enhanced navbar with FIXED mobile menu closing ready');
 });
 
-// Función global para cerrar menú (útil para otros scripts)
+// Función global para cerrar menú (útil para otros scripts) - MEJORADA
 window.closeNavbarMenu = function() {
+    console.log('Global close menu called');
     const mainMenu = document.getElementById('mainmenu');
     const menuBtn = document.getElementById('menu-btn');
     const body = document.body;
+    const header = document.querySelector('header.header-mobile');
     
     if (mainMenu && menuBtn) {
         mainMenu.classList.remove('active');
         menuBtn.classList.remove('menu-open');
         body.classList.remove('menu-open');
+        if (header) header.classList.remove('menu-active');
         body.style.overflow = '';
+        body.style.position = '';
+        body.style.width = '';
+        console.log('Global menu close completed');
     }
 };
